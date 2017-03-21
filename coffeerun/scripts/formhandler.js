@@ -15,6 +15,11 @@
         }
     }
 
+
+    var slider = document.getElementById('strengthLevel');
+
+
+
     FormHandler.prototype.addSubmitHandler = function(fn) {
         console.log('Setting submit handler for form');
         this.$formElement.on('submit', function(event) {
@@ -45,8 +50,38 @@
                 message = emailAddress + ' is not an authorized email address!';
                 event.target.setCustomValidity(message);
             }
+
+
+            var $slider = $('#strengthLevel');
+
+            var $order = $('#coffeeOrder');
+            $order.on('input', function(event) {
+                if (!window.App.Validation.isDecafValid($order[0].value, $slider[0].value)) {
+                    event.target.setCustomValidity('');
+                } else {
+                    var message = "Decaf Coffee cannot have caffeine strength greater than 20";
+                    event.target.setCustomValidity(message);
+                }
+            });
+            $slider.on('input', function(event) {
+                if (!window.App.Validation.isDecafValid($order[0].value, $slider[0].value)) {
+                    event.target.setCustomValidity('');
+                } else {
+                    var message = "Decaf Coffee cannot have caffeine strength greater than 20";
+                    event.target.setCustomValidity(message);
+                }
+            });
+
         });
     };
+
+
+
+
+
+
+
+
 
     App.FormHandler = FormHandler;
     window.App = App;
